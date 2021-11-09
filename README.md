@@ -15,8 +15,8 @@ As of now this prototype does not properly make calls to the server.
 * clone respository
 * cd into root folder
 * `yarn` or `npm install` to install dependencies
-* `yarn start` or `npm start` to start the app in dev mode
-* browser should open up at http://localhost:3000
+* `yarn dev` or `npm run dev` to start the app in dev mode
+* visit http://localhost:3000 in browser
 
 
 
