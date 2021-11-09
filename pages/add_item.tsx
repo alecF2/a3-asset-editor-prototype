@@ -69,7 +69,8 @@ const add_item = () => {
       localStorage.setItem("state", JSON.stringify(data))
 
       // go back to add collection page
-      router.push("/add_collection")
+      // router.push("/add_collection")
+      router.back()
     }
 
     // console.log("submitted")

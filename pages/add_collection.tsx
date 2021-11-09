@@ -10,9 +10,11 @@ import styles from '@styles/add_collection.module.scss'
 import { ELanguage, ICollection, IVocab } from '../interfaces'
 
 import { useState, useEffect, MouseEvent } from 'react'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { useRouter } from 'next/router'
 
 const add_collection = () => {
+  const router = useRouter()
   const [lang, setLang] = useState<ELanguage>()
   const [name, setName] = useState<string>("")
   const [authorName, setAuthorName] = useState<string>("")
@@ -43,13 +45,19 @@ const add_collection = () => {
 
     try {
       // this won't work until the backend is implemented
-      const response = axios.post("/insert_collection", collection)
+      let response: AxiosResponse
+      if (router.query.edit === "true") {
+        response = await axios.post(`/edit_collection/${collection.id}`, collection)
+      } else {
+        response = await axios.post("/insert_collection", collection)
+      }
       console.log(response)
     } catch (err) {
       console.log(err)
     }
-
+    
     // clear all data on browser now that collection is submitted
+    router.replace("/add_collection")
     localStorage.clear()
     setAuthorEmail("")
     setAuthorName("")

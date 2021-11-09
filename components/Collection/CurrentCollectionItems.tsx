@@ -9,18 +9,26 @@ interface Props {
 }
 
 const CurrentCollectionItems = ({ items, setItems }: Props) => {
+  const handleRemove = (id: string) => {
+    const newItems = items!.filter(item => item.id !== id)
+    setItems(newItems)
+  }
+
   const Card = (item: IVocab) => {
     return (
       <article key={item.value}>
         <h3>{item.value}</h3>
         <h3>{item.translation}</h3>
+        <button onClick={() => handleRemove(item.id)}>REMOVE</button>
       </article>
     )
   }
 
   useEffect(() => {
-    if (localStorage.getItem("currentCollection") != null)
-    setItems(JSON.parse(localStorage.getItem("currentCollection")!))
+    if (localStorage.getItem("state") != null) {
+      console.log("setting")
+      setItems(JSON.parse(localStorage.getItem("state")!).items)
+    }
   }, [])
 
   return (

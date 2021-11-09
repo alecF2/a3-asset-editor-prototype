@@ -2,20 +2,55 @@ import styles from './Options.module.scss'
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import Axios from 'axios'
-import { ICollection } from 'interfaces'
+import Axios, { AxiosResponse } from 'axios'
+import { ICollection, IVocab } from 'interfaces'
 
 const Options = () => {
   const [collections, setCollections] = useState<ICollection[]>([])
 
   useEffect(() => {
     async function getCollections() {
-      const response = await Axios.get("/get_all_collections")
-      const data = JSON.parse(response.data)
+      let response: AxiosResponse
+      let data: ICollection[]
+      try {
+        response = await Axios.get("/get_all_collections")
+        data = JSON.parse(response.data)
+      } catch (err) {
+        console.log(err)
+        const sample = {
+          author: {
+            email: {
+              address: "alec@null.net"
+            },
+            id: "",
+            name: "Alec Atienza",
+            rank: 0
+          },
+          description: "a collection Spanish vocab",
+          id: "random",
+          lang: 0,
+          name: "Spanish",
+          items: [
+            {
+              id: "",
+              lang: "Spanish",
+              translation: "cat",
+              value: "el gato"
+            },
+            {
+              id: "",
+              lang: "Spanish",
+              translation: "dog",
+              value: "el perro"
+            }
+          ]
+        }
+        data = [sample]
+      }
       setCollections(data)
     }
 
-    // getCollections()
+    getCollections()
   }, [])
 
   return (
@@ -25,19 +60,25 @@ const Options = () => {
       </div>
       <div className={styles.box}>
         <h2>Your Collections</h2>
-        {collections.map(col => {
-          return <button>{col.name}</button>
-        })}
-        <button>Spanish</button>
+        <Link href="/creator_view/collections">
+          <a><button>Collections View</button></a>
+        </Link>
+        {/* {collections.map(col => {
+          return (
+            <Link href={`/creator_view/view_collection?id=${col.id}`}>
+              <a><button key={col.id}>{col.name}</button></a>
+            </Link>
+          )
+        })} */}
       </div>
       <div className={styles.box}>
         <h2>Content Creation</h2>
         <div>
-          <Link href="add_collection">
-            <button>New Collection</button>
+          <Link href="/add_collection">
+            <a><button>New Collection</button></a>
           </Link>
-          <Link href="add_item">
-            <button>New Item</button>
+          <Link href="/add_item">
+            <a><button>New Item</button></a>
           </Link>
         </div>
       </div>

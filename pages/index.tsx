@@ -5,9 +5,9 @@ import Link from 'next/link'
 const Home: NextPage = () => {
   return (
     <div>
-      <Link href="add_item">Add items</Link>
-      <br />
-      <Link href="add_collection">Add collection</Link>
+      {/* <Link href="add_item">Add items</Link>
+      <br /> */}
+      <Link href="/creator_view">Creator view</Link>
     </div>
   )
 }
