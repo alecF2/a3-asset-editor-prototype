@@ -5,7 +5,7 @@ const PublicCheck = () => {
     <section id={styles.container}>
       <div>
         <label htmlFor="public">Public<br />(share with other instructors)</label>
-        <input type="checkbox" name="public" id="public" checked />
+        <input type="checkbox" name="public" id="public" />
       </div>
     </section>
   )

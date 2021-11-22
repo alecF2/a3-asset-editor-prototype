@@ -18,7 +18,7 @@ import { ELanguage } from './languages';
  * @member adverb {6}
  * @member conjunction {7}
  */
- export enum EPartOfSpeech {
+export enum EPartOfSpeech {
     noun = 0,
     verb = 1,
     participle = 2,

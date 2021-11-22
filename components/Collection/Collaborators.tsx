@@ -17,7 +17,7 @@ const Collaborators = ({ authorName, setAuthorName, authorEmail, setAuthorEmail 
         <label htmlFor="collaborators">Collaborators</label>
         <div>
           <label htmlFor="emailCheck">Send email?</label>
-          <input type="checkbox" name="emailCheck" id="emailCheck" checked />
+          <input type="checkbox" name="emailCheck" id="emailCheck" />
         </div>
       </div>
       <div>
